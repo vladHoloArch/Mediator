@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1082
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Holoarch.Mediator.PlaneFromDepth", "Holoarch.Mediator.PlaneFromDepth\Holoarch.Mediator.PlaneFromDepth.csproj", "{4B335F71-CA20-44CB-B04E-D0C93CE058DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Holoarch.Mediator.RsDepthCam", "Holoarch.Mediator.RsDepthCam\Holoarch.Mediator.RsDepthCam.csproj", "{0ED0910A-D03A-44F1-96F1-5729654531FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Holoarch.Mediator", "Holoarch.Mediator\Holoarch.Mediator.csproj", "{4CA3B91C-A3F2-4CBD-BD02-54A7711484FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Holoarch.Mediator.Commons", "Holoarch.Mediator.Commons\Holoarch.Mediator.Commons.csproj", "{162C4EB6-62D1-41C5-BB37-7C9FD13ABC44}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4B335F71-CA20-44CB-B04E-D0C93CE058DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B335F71-CA20-44CB-B04E-D0C93CE058DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B335F71-CA20-44CB-B04E-D0C93CE058DD}.Debug|x64.ActiveCfg = Debug|x64
+		{4B335F71-CA20-44CB-B04E-D0C93CE058DD}.Debug|x64.Build.0 = Debug|x64
+		{4B335F71-CA20-44CB-B04E-D0C93CE058DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B335F71-CA20-44CB-B04E-D0C93CE058DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B335F71-CA20-44CB-B04E-D0C93CE058DD}.Release|x64.ActiveCfg = Release|x64
+		{4B335F71-CA20-44CB-B04E-D0C93CE058DD}.Release|x64.Build.0 = Release|x64
+		{0ED0910A-D03A-44F1-96F1-5729654531FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ED0910A-D03A-44F1-96F1-5729654531FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ED0910A-D03A-44F1-96F1-5729654531FD}.Debug|x64.ActiveCfg = Debug|x64
+		{0ED0910A-D03A-44F1-96F1-5729654531FD}.Debug|x64.Build.0 = Debug|x64
+		{0ED0910A-D03A-44F1-96F1-5729654531FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ED0910A-D03A-44F1-96F1-5729654531FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ED0910A-D03A-44F1-96F1-5729654531FD}.Release|x64.ActiveCfg = Release|Any CPU
+		{0ED0910A-D03A-44F1-96F1-5729654531FD}.Release|x64.Build.0 = Release|Any CPU
+		{4CA3B91C-A3F2-4CBD-BD02-54A7711484FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CA3B91C-A3F2-4CBD-BD02-54A7711484FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CA3B91C-A3F2-4CBD-BD02-54A7711484FE}.Debug|x64.ActiveCfg = Debug|x64
+		{4CA3B91C-A3F2-4CBD-BD02-54A7711484FE}.Debug|x64.Build.0 = Debug|x64
+		{4CA3B91C-A3F2-4CBD-BD02-54A7711484FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CA3B91C-A3F2-4CBD-BD02-54A7711484FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CA3B91C-A3F2-4CBD-BD02-54A7711484FE}.Release|x64.ActiveCfg = Release|Any CPU
+		{4CA3B91C-A3F2-4CBD-BD02-54A7711484FE}.Release|x64.Build.0 = Release|Any CPU
+		{162C4EB6-62D1-41C5-BB37-7C9FD13ABC44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{162C4EB6-62D1-41C5-BB37-7C9FD13ABC44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{162C4EB6-62D1-41C5-BB37-7C9FD13ABC44}.Debug|x64.ActiveCfg = Debug|x64
+		{162C4EB6-62D1-41C5-BB37-7C9FD13ABC44}.Debug|x64.Build.0 = Debug|x64
+		{162C4EB6-62D1-41C5-BB37-7C9FD13ABC44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{162C4EB6-62D1-41C5-BB37-7C9FD13ABC44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{162C4EB6-62D1-41C5-BB37-7C9FD13ABC44}.Release|x64.ActiveCfg = Release|Any CPU
+		{162C4EB6-62D1-41C5-BB37-7C9FD13ABC44}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CE39A148-696D-46C3-BE51-43F67E1C1E28}
+	EndGlobalSection
+EndGlobal
