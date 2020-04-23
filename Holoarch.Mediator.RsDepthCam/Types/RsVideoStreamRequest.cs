@@ -1,5 +1,5 @@
-﻿using Intel.RealSense;
-using System;
+﻿using System;
+using Intel.RealSense;
 
 namespace Holoarch.Mediator.RsDepthCam
 {
@@ -26,30 +26,31 @@ namespace Holoarch.Mediator.RsDepthCam
         public static RsVideoStreamRequest FromFrame(VideoFrame f)
         {
             using (var p = f.Profile)
+            {
                 return new RsVideoStreamRequest(
                     p.Stream,
                     p.Format,
                     p.Framerate,
                     p.Index,
                     f.Width,
-                    f.Height
-                );
+                    f.Height);
+            }
         }
-
 
         public static RsVideoStreamRequest FromProfile(StreamProfile p)
         {
             var isVideo = p.Is(Extension.VideoProfile);
             using (p)
             using (var v = isVideo ? p.As<VideoStreamProfile>() : null)
+            {
                 return new RsVideoStreamRequest(
                     p.Stream,
                     p.Format,
                     p.Framerate,
                     p.Index,
                     isVideo ? v.Width : 0,
-                    isVideo ? v.Height : 0
-                );
+                    isVideo ? v.Height : 0);
+            }
         }
 
         public override bool Equals(object other)
@@ -74,17 +75,35 @@ namespace Holoarch.Mediator.RsDepthCam
             using (var p = vf.Profile)
             {
                 if (Stream != Stream.Any && Stream != p.Stream)
+                {
                     return true;
+                }
+
                 if (Format != Format.Any && Format != p.Format)
+                {
                     return true;
+                }
+
                 if (Width != 0 && Width != vf.Width)
+                {
                     return true;
+                }
+
                 if (Height != 0 && Height != vf.Height)
+                {
                     return true;
+                }
+
                 if (Framerate != 0 && Framerate != p.Framerate)
+                {
                     return true;
+                }
+
                 if (StreamIndex != 0 && StreamIndex != p.Index)
+                {
                     return true;
+                }
+
                 return false;
             }
         }
@@ -92,17 +111,35 @@ namespace Holoarch.Mediator.RsDepthCam
         public bool HasConflict(RsVideoStreamRequest other)
         {
             if (Stream != Stream.Any && Stream != other.Stream)
+            {
                 return true;
+            }
+
             if (Format != Format.Any && Format != other.Format)
+            {
                 return true;
+            }
+
             if (Width != 0 && Width != other.Width)
+            {
                 return true;
+            }
+
             if (Height != 0 && Height != other.Height)
+            {
                 return true;
-            if (Framerate != 0 && Framerate != other.Framerate)
+            }
+
+            if (Framerate != 0 && Framerate != other.Framerate) 
+            {
                 return true;
-            if (StreamIndex != 0 && StreamIndex != other.StreamIndex)
+            }
+
+            if (StreamIndex != 0 && StreamIndex != other.StreamIndex) 
+            {
                 return true;
+            }
+
             return false;
         }
 

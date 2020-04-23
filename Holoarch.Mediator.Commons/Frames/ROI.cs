@@ -2,9 +2,9 @@
 {
     public struct ROI
     {
-        public int minX;
-        public int minY;
-        public int maxX;
-        public int maxY;
+        public int MinX;
+        public int MinY;
+        public int MaxX;
+        public int MaxY;
     }
 }

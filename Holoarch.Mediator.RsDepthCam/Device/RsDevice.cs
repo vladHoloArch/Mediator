@@ -1,11 +1,11 @@
-﻿using Intel.RealSense;
-using System;
+﻿using System;
+using Intel.RealSense;
 using System.Linq;
 using System.Threading;
 
 namespace Holoarch.Mediator.RsDepthCam
 {
-    public class RsDevice : RsFrameProvider 
+    public class RsDevice : RsFrameProvider
     {
         private Thread worker;
         private readonly AutoResetEvent stopEvent = new AutoResetEvent(false);
@@ -50,13 +50,14 @@ namespace Holoarch.Mediator.RsDepthCam
         /// </summary>
         public RsConfiguration DeviceConfiguration = new RsConfiguration
         {
-            mode = RsConfiguration.Mode.Live,
+            PlayMode = RsConfiguration.Mode.Live,
             RequestedSerialNumber = string.Empty,
-            Profiles = new RsVideoStreamRequest[] {
-            new RsVideoStreamRequest {Stream = Stream.Depth, StreamIndex = -1, Width = 640, Height = 480, Format = Format.Z16 , Framerate = 30 }
-            //new RsVideoStreamRequest {Stream = Stream.Infrared, StreamIndex = -1, Width = 640, Height = 480, Format = Format.Y8 , Framerate = 30 },
-            //new RsVideoStreamRequest {Stream = Stream.Color, StreamIndex = -1, Width = 640, Height = 480, Format = Format.Rgb8 , Framerate = 30 }
-        }
+            Profiles = new RsVideoStreamRequest[] 
+            {
+            new RsVideoStreamRequest { Stream = Stream.Depth, StreamIndex = -1, Width = 640, Height = 480, Format = Format.Z16 ,Framerate = 30 }
+            ////new RsVideoStreamRequest {Stream = Stream.Infrared, StreamIndex = -1, Width = 640, Height = 480, Format = Format.Y8 , Framerate = 30 },
+            ////new RsVideoStreamRequest {Stream = Stream.Color, StreamIndex = -1, Width = 640, Height = 480, Format = Format.Rgb8 , Framerate = 30 }
+            }
         };
 
         public void Enable()
@@ -64,11 +65,12 @@ namespace Holoarch.Mediator.RsDepthCam
             m_pipeline = new Pipeline();
 
             using (var cfg = DeviceConfiguration.ToPipelineConfig())
+            {
                 ActiveProfile = m_pipeline.Start(cfg);
+            }
 
             DeviceConfiguration.Profiles = ActiveProfile.Streams.Select(RsVideoStreamRequest.FromProfile).ToArray();
             m_DepthScale = ActiveProfile.Device.Sensors[0].DepthScale;
-
 
             if (processMode == ProcessMode.Multithread)
             {
@@ -81,7 +83,6 @@ namespace Holoarch.Mediator.RsDepthCam
             start();
         }
 
-    
         public override void Dispose()
         {
             Disable();
@@ -91,21 +92,30 @@ namespace Holoarch.Mediator.RsDepthCam
         public void Update()
         {
             if (!Streaming)
+            {
                 return;
-
+            }
+           
             if (processMode != ProcessMode.UnityThread)
+            {
                 return;
+            }
 
             FrameSet frames;
 
             if (m_pipeline.PollForFrames(out frames))
             {
                 using (frames)
+                {
                     RaiseSampleEvent(frames);
+                }
             }
         }
 
-        public PipelineProfile GetActiveProfile() { return ActiveProfile; }
+        public PipelineProfile GetActiveProfile()
+        {
+            return ActiveProfile;
+        }
 
         private void start()
         {
@@ -118,7 +128,7 @@ namespace Holoarch.Mediator.RsDepthCam
             var onNewSample = OnNewSample;
             if (onNewSample != null)
             {
-                var genFrame = realsenseFrameToGenericFrame(frame);
+                var genFrame = frame.RealsenseFrameToGenericFrame(m_DepthScale);
                 onNewSample(genFrame);
             }
         }
@@ -131,15 +141,17 @@ namespace Holoarch.Mediator.RsDepthCam
             while (!stopEvent.WaitOne(0))
             {
                 using (var frames = m_pipeline.WaitForFrames())
+                {
                     RaiseSampleEvent(frames);
+                }
             }
         }
 
         private void Disable()
         {
             OnNewSample = null;
-            // OnNewSampleSet = null;
 
+            // OnNewSampleSet = null;
             if (worker != null)
             {
                 stopEvent.Set();
@@ -147,7 +159,9 @@ namespace Holoarch.Mediator.RsDepthCam
             }
 
             if (Streaming && OnStop != null)
+            {
                 OnStop();
+            }
 
             if (ActiveProfile != null)
             {
@@ -162,41 +176,6 @@ namespace Holoarch.Mediator.RsDepthCam
             }
 
             Streaming = false;
-        }
-
-        private Commons.DepthFrame realsenseFrameToGenericFrame(Frame i_Frame)
-        {
-            Commons.DepthFrame res = new Commons.DepthFrame();
-            res.Data = i_Frame.Data;
-            res.DepthScale = m_DepthScale;
-
-            var videoStreamProfile = i_Frame.GetProfile<VideoStreamProfile>();
-            res.Height = videoStreamProfile.Height;
-            res.Width = videoStreamProfile.Width;
-
-            Commons.VideoStreamProfile genVideoStreamProfile = new Commons.VideoStreamProfile();
-            genVideoStreamProfile.Stream = (Commons.Stream)videoStreamProfile.Stream;
-            genVideoStreamProfile.Format = (Commons.Format)videoStreamProfile.Format;
-
-            var intrinsics = videoStreamProfile.GetIntrinsics();
-            Commons.Intrinsics genIntrinsics = new Commons.Intrinsics()
-            {
-                width = intrinsics.width,
-                height = intrinsics.height,
-                ppx = intrinsics.ppx,
-                ppy = intrinsics.ppy,
-                fx = intrinsics.fx,
-                fy = intrinsics.fy,
-                model = (Commons.Distortion)intrinsics.model,
-                coeffs = intrinsics.coeffs
-            };
-
-            genVideoStreamProfile.SetIntrinsics(genIntrinsics);
-
-            res.IsComposite = i_Frame.IsComposite;
-            res.Profile = genVideoStreamProfile;
-
-            return res;
         }
     }
 }

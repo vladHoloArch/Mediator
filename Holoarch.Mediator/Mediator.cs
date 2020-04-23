@@ -1,5 +1,5 @@
-﻿using Holoarch.Mediator.Commons;
-using System;
+﻿using System;
+using Holoarch.Mediator.Commons;
 using System.Collections.Generic;
 using System.Numerics;
 
@@ -27,7 +27,7 @@ namespace Holoarch.Mediator
 
             while (!Console.KeyAvailable)
             {
-
+                // just a test loop
             }
 
             m_WorkConfig.Disable();
@@ -85,24 +85,14 @@ namespace Holoarch.Mediator
             return res;
         }
 
-        private void onRes(Result i_Result)
+        private void onRes<T>(T i_Result) where T : Result
         {
-            Console.WriteLine(i_Result.p.Normal);
-            vectors.Add(i_Result.p.Normal);
+            var res = i_Result as PlaneResult;
+            if (res.IsPlaneReconstructed)
+            {
+                Console.WriteLine(res.P.Normal + " distance " + res.Distance);
+                vectors.Add(res.P.Normal);
+            }
         }
     }
-
-    //public class Program
-    //{
-    //    public static void Main(string[] args)
-    //    {
-    //        var mediator = new Mediator(WorkMode.Depth.Realsense);
-
-    //        while (!Console.KeyAvailable)
-    //        {
-
-    //        }
-
-    //    }
-    //}
 }

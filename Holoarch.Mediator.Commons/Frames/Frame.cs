@@ -2,9 +2,10 @@
 
 namespace Holoarch.Mediator.Commons
 {
-    public class Frame
+    public class Frame : IDisposable
     {
         public float DepthScale;
+
         public int Width { get; set; }
 
         public int Height { get; set; }
@@ -18,6 +19,11 @@ namespace Holoarch.Mediator.Commons
         public StreamProfile GetProfile<T>() where T : StreamProfile
         {
             return Profile;
+        }
+
+        public virtual void Dispose()
+        {
+            GC.SuppressFinalize(this);
         }
     }
 }

@@ -19,11 +19,20 @@
                 m_Q.Enqueue(i_Frame);
                 T overflow;
 
-                while (m_Q.Count > Limit && m_Q.TryDequeue(out overflow)) ;
+                while (m_Q.Count > Limit && m_Q.TryDequeue(out overflow))
+                {
+                    // the work is done in the condition
+                }
             }
         }
 
-        public int Count { get { return m_Q.Count; } }
+        public int Count
+        {
+            get
+            {
+                return m_Q.Count;
+            }
+        }
 
         public bool Dequeue(out T o_Frame)
         {
@@ -38,7 +47,9 @@
                     o_Frame = tRet;
                 }
                 else
+                {
                     o_Frame = default;
+                }
 
                 return res;
             }
@@ -51,9 +62,13 @@
                 T tRet;
 
                 if (m_Q.TryPeek(out tRet))
+                {
                     return tRet;
+                }
                 else
+                {
                     return default;
+                }
             }
         }
     }

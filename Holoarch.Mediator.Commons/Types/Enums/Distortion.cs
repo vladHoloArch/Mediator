@@ -19,6 +19,5 @@
 
         /// <summary Four parameter Kannala Brandt distortion model</summary>
         KannalaBrandt4 = 5,
-
     }
 }

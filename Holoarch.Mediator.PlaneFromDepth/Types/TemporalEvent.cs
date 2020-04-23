@@ -1,4 +1,4 @@
-﻿///-----------------------------------------------------------------
+﻿/// -----------------------------------------------------------------
 ///   Namespace:      Name
 ///   Class:          TemporalEvent
 ///   Description:    A simple decision making class that decides which user instruction to display	
@@ -6,7 +6,7 @@
 ///   Notes:          First Release
 ///   Revision History:
 ///   Name:           Date:        Description:	
-///-----------------------------------------------------------------
+/// -----------------------------------------------------------------
 using System;
 using System.Collections.Generic;
 
@@ -34,14 +34,20 @@ namespace Holoarch.Mediator.PlaneFromDepth
 
         public bool Eval()
         {
-            if (Global.Time.ElapsedMilliseconds < m_Window) return false;
+            if (Global.Time.ElapsedMilliseconds < m_Window)
+            {
+                return false;
+            }
 
             int from = m_Measurements.Count - 1;
 
             // Discard older than assigned window values
             for (; from > 0; from--)
             {
-                if ((Global.Time.ElapsedMilliseconds - m_Measurements[from].Item1) > m_Window) break;
+                if ((Global.Time.ElapsedMilliseconds - m_Measurements[from].Item1) > m_Window)
+                {
+                    break;
+                }
             }
 
             m_Measurements.RemoveRange(0, from);
@@ -50,7 +56,10 @@ namespace Holoarch.Mediator.PlaneFromDepth
             // Count truths
             for (int i = 0; i < m_Measurements.Count; i++)
             {
-                if (m_Measurements[i].Item2) trues++;
+                if (m_Measurements[i].Item2)
+                {
+                    trues++;
+                }
             }
 
             return trues * 2 > m_Measurements.Count;

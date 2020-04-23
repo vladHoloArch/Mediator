@@ -79,7 +79,8 @@
     <Compile Include="Types\Enums\Format.cs" />
     <Compile Include="Types\Enums\Stream.cs" />
     <Compile Include="Types\Intrinsics.cs" />
-    <Compile Include="Types\Result.cs" />
+    <Compile Include="Types\Results\PlaneResult.cs" />
+    <Compile Include="Types\Results\Result.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

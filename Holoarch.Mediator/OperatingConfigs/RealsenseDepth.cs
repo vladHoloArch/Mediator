@@ -11,7 +11,7 @@ namespace Holoarch.Mediator
 
         public RsDevice Source { get; private set; }
 
-        public override void Enable(Action<Result> onRes)
+        public override void Enable(Action<PlaneResult> onRes)
         {
             MediatorResultFunc = onRes;
             Source = new RsDevice(); 
@@ -37,8 +37,7 @@ namespace Holoarch.Mediator
 
         protected override void OnNewSample(Frame i_Frame)
         {
-            //Console.WriteLine("frame recevied from device");
-
+            // Console.WriteLine("frame recevied from device");
             if (m_PlaneFitter == null)
             {
                 m_PlaneFitter = new PlaneFitter();
@@ -49,7 +48,7 @@ namespace Holoarch.Mediator
             m_PlaneFitter.onNewDepthSample(i_Frame);
         }
 
-        private void OnRes(Result i_Result)
+        private void OnRes(PlaneResult i_Result)
         {
             MediatorResultFunc?.Invoke(i_Result);
         }

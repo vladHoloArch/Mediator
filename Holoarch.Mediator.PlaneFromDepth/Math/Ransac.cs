@@ -14,7 +14,7 @@ namespace Holoarch.Mediator.PlaneFromDepth
             List<Vector3> inliers = null;
             Plane plane = default;
             int maxNumberOfIterationsCalculated = (int)Math.Ceiling(Math.Log10(1f - 0.99f) / Math.Log10(1 - Math.Pow(1f - 0.01f, 3)));
-            m_NumberOfIterations = maxNumberOfIterationsCalculated > m_NumberOfIterations?  maxNumberOfIterationsCalculated : m_NumberOfIterations;
+            m_NumberOfIterations = maxNumberOfIterationsCalculated > m_NumberOfIterations ? maxNumberOfIterationsCalculated : m_NumberOfIterations;
             float bestScore = float.PositiveInfinity;
             Vector3 bestPointA = Vector3.Zero;
             Vector3 bestPointB = Vector3.Zero;
@@ -25,16 +25,7 @@ namespace Holoarch.Mediator.PlaneFromDepth
 
             if (planeFitter)
             {
-                //newPoints = new List<Vector3>();
-
-                //for (int i = 0; i < points.Count; i++)
-                //{
-                //    if (points[i] != Vector3.Zero)
-                //    {
-                //        newPoints.Add(points[i]);
-                //    }
-                //}
-
+                // Consider filtering all zero vectors
                 newPoints = points;
             }
             else
@@ -94,7 +85,10 @@ namespace Holoarch.Mediator.PlaneFromDepth
                         else
                         {
                             if (!planeFitter)
+                            {
                                 currentInliers.Add(Vector3.Zero);
+                            }
+
                             currentScore += threshold;
                         }
                     }
@@ -150,5 +144,4 @@ namespace Holoarch.Mediator.PlaneFromDepth
             return new Vector3[] { min[1], max[1] };
         }
     }
-
 }

@@ -2,39 +2,38 @@
 
 namespace Holoarch.Mediator.Commons
 {
-
     [System.Serializable]
     [StructLayout(LayoutKind.Sequential)]
     public struct Intrinsics
     {
         /// <summary> Width of the image in pixels </summary>
-        public int width;
+        public int Width;
 
         /// <summary> Height of the image in pixels </summary>
-        public int height;
+        public int Height;
 
         /// <summary> Horizontal coordinate of the principal point of the image, as a pixel offset from the left edge </summary>
-        public float ppx;
+        public float Ppx;
 
         /// <summary> Vertical coordinate of the principal point of the image, as a pixel offset from the top edge </summary>
-        public float ppy;
+        public float Ppy;
 
         /// <summary> Focal length of the image plane, as a multiple of pixel width </summary>
-        public float fx;
+        public float Fx;
 
         /// <summary> Focal length of the image plane, as a multiple of pixel height </summary>
-        public float fy;
+        public float Fy;
 
         /// <summary> Distortion model of the image </summary>
-        public Distortion model;
+        public Distortion Model;
 
         /// <summary> Distortion coefficients, order: k1, k2, p1, p2, k3 </summary>
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 5)]
-        public float[] coeffs;
+        public float[] Coeffs;
 
         public override string ToString()
         {
-            return $"(width:{width}, height:{height}, ppx:{ppx}, ppy:{ppy}, fx:{fx}, fy:{fy}, model:{model}, coeffs:[{coeffs[0]}, {coeffs[1]}, {coeffs[2]}, {coeffs[3]}, {coeffs[4]}])";
+            return $"(width:{Width}, height:{Height}, ppx:{Ppx}, ppy:{Ppy}, fx:{Fx}, fy:{Fy}, model:{Model}, coeffs:[{Coeffs[0]}, {Coeffs[1]}, {Coeffs[2]}, {Coeffs[3]}, {Coeffs[4]}])";
         }
 
         /// <summary>
@@ -47,8 +46,8 @@ namespace Holoarch.Mediator.Commons
             {
                 return new float[]
                 {
-                    (float)(System.Math.Atan2(ppx + 0.5f, fx) + System.Math.Atan2(width - (ppx + 0.5f), fx)) * 57.2957795f,
-                    (float)(System.Math.Atan2(ppy + 0.5f, fy) + System.Math.Atan2(height - (ppy + 0.5f), fy)) * 57.2957795f
+                    (float)(System.Math.Atan2(Ppx + 0.5f, Fx) + System.Math.Atan2(Width - (Ppx + 0.5f), Fx)) * 57.2957795f,
+                    (float)(System.Math.Atan2(Ppy + 0.5f, Fy) + System.Math.Atan2(Height - (Ppy + 0.5f), Fy)) * 57.2957795f
                 };
             }
         }
